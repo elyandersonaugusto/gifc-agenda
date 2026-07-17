@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0F3A48" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>XXXI Encontro de Casais – GIFC BSF 2026</title>
+  <style>
+    /* =====================================================
+       VARIÁVEIS DE TEMA
+    ===================================================== */
+    :root {
+      --primary:        #0F3A48;
+      --primary-light:  #16506A;
+      --primary-dark:   #09262F;
+      --accent:         #4FC3F7;
+      --now-color:      #E53935;
+      --next-color:     #F57F17;
+      --palestra-color: #5E35B1;
+      --cerim-color:    #00796B;
+
+      --bg:             #F0F4F7;
+      --card-bg:        #FFFFFF;
+      --text:           #1A2332;
+      --text-muted:     #607080;
+      --border:         #DDE3EA;
+      --tab-inactive:   rgba(255,255,255,0.45);
+      --shadow:         0 1px 4px rgba(0,0,0,0.10);
+      --shadow-md:      0 3px 12px rgba(0,0,0,0.12);
+    }
+    [data-theme="dark"] {
+      --bg:             #0D1B26;
+      --card-bg:        #162232;
+      --text:           #DDE8F0;
+      --text-muted:     #7A9BB0;
+      --border:         #1F3448;
+      --tab-inactive:   rgba(255,255,255,0.30);
+      --shadow:         0 1px 4px rgba(0,0,0,0.35);
+      --shadow-md:      0 3px 12px rgba(0,0,0,0.45);
+      --primary:        #0C3040;
+      --primary-light:  #124254;
+    }
+
+    /* =====================================================
+       RESET & BASE
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                   'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background .3s, color .3s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button { font-family: inherit; cursor: pointer; border: none; }
+    input  { font-family: inherit; }
+    a      { color: inherit; }
+
+    /* =====================================================
+       HEADER FIXO
+    ===================================================== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--primary);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.30);
+    }
+
+    /* --- Topo: título + toggle escuro --- */
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px 10px;
+    }
+    .event-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .event-cross {
+      font-size: 1.5rem;
+      line-height: 1;
+      opacity: .85;
+    }
+    .event-texts {}
+    .event-name {
+      color: #fff;
+      font-size: .97rem;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: .2px;
+    }
+    .event-sub {
+      color: rgba(255,255,255,.65);
+      font-size: .72rem;
+      margin-top: 2px;
+    }
+    .btn-dark {
+      flex-shrink: 0;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border-radius: 50%;
+      width: 38px; height: 38px;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .btn-dark:hover { background: rgba(255,255,255,.22); }
+
+    /* --- Barra de busca --- */
+    .search-wrap {
+      padding: 0 16px 10px;
+    }
+    .search-inner {
+      position: relative;
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: .95rem;
+      pointer-events: none;
+      opacity: .7;
+    }
+    .search-input {
+      width: 100%;
+      padding: 9px 40px 9px 36px;
+      border-radius: 22px;
+      border: none;
+      background: rgba(255,255,255,.13);
+      color: #fff;
+      font-size: .92rem;
+      outline: none;
+      transition: background .2s;
+    }
+    .search-input::placeholder { color: rgba(255,255,255,.55); }
+    .search-input:focus { background: rgba(255,255,255,.22); }
+    .btn-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      color: rgba(255,255,255,.7);
+      font-size: 1rem;
+      display: none;
+      width: 24px; height: 24px;
+      align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+    .btn-clear.visible { display: flex; }
+    .search-all-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      color: rgba(255,255,255,.7);
+      font-size: .75rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .search-all-row input[type=checkbox] { cursor: pointer; accent-color: var(--accent); }
+
+    /* --- Abas --- */
+    .tabs {
+      display: flex;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 11px 4px 10px;
+      background: transparent;
+      color: var(--tab-inactive);
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .3px;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .tab-btn.active {
+      color: #fff;
+      border-bottom-color: var(--accent);
+    }
+
+    /* =====================================================
+       BARRA DE STATUS
+    ===================================================== */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 16px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .72rem;
+      color: var(--text-muted);
+      flex: 1;
+      min-width: 0;
+    }
+    .pulse-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4caf50;
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    .pulse-dot.error { background: var(--now-color); animation: none; }
+    .pulse-dot.loading { background: var(--next-color); }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(.8); }
+    }
+    .last-update { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .btn-refresh {
+      flex-shrink: 0;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 14px;
+      padding: 5px 13px;
+      font-size: .72rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background .2s, opacity .2s;
+    }
+    .btn-refresh:disabled { opacity: .55; cursor: not-allowed; }
+    .btn-refresh:not(:disabled):hover { background: var(--primary-light); }
+    .spin { display: inline-block; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* =====================================================
+       ERRO
+    ===================================================== */
+    .error-box {
+      display: none;
+      margin: 12px 12px 0;
+      padding: 12px 14px;
+      background: rgba(229,57,53,.08);
+      border: 1px solid rgba(229,57,53,.30);
+      border-radius: 10px;
+      font-size: .8rem;
+      color: #c62828;
+      line-height: 1.5;
+    }
+    [data-theme="dark"] .error-box {
+      background: rgba(229,57,53,.12);
+      color: #ef9a9a;
+      border-color: rgba(229,57,53,.25);
+    }
+    .error-box pre {
+      white-space: pre-wrap;
+      margin-top: 6px;
+      font-size: .75rem;
+      opacity: .85;
+    }
+
+    /* =====================================================
+       CONTEÚDO PRINCIPAL
+    ===================================================== */
+    .content {
+      padding: 10px 12px 16px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Cabeçalho de dia */
+    .day-label {
+      text-align: center;
+      padding: 12px 0 8px;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* =====================================================
+       CARDS
+    ===================================================== */
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 14px 14px 14px 18px;
+      margin-bottom: 9px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--border);
+      position: relative;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .card.is-now {
+      border-left-color: var(--now-color);
+      box-shadow: 0 0 0 1px rgba(229,57,53,.15), var(--shadow-md);
+    }
+    .card.is-next  { border-left-color: var(--next-color); }
+    .card.is-palestra { border-left-color: var(--palestra-color); }
+    .card.is-palestra.is-now { border-left-color: var(--now-color); }
+    .card.is-cerim { border-left-color: var(--cerim-color); }
+    .card.is-cerim.is-now { border-left-color: var(--now-color); }
+
+    /* Badges */
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 7px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: .62rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge-now       { background: var(--now-color);      color: #fff; }
+    .badge-next      { background: var(--next-color);     color: #fff; }
+    .badge-palestra  { background: var(--palestra-color); color: #fff; }
+    .badge-cerim     { background: var(--cerim-color);    color: #fff; }
+    .badge-countdown {
+      background: transparent;
+      color: var(--next-color);
+      border: 1px solid var(--next-color);
+    }
+
+    /* Horário */
+    .card-time {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    [data-theme="dark"] .card-time { color: var(--accent); }
+    .time-dur {
+      font-size: .7rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    /* Título */
+    .card-title {
+      font-size: .97rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 4px;
+      /* deixa espaço para botão .ics */
+      padding-right: 76px;
+    }
+
+    /* Responsável */
+    .card-resp {
+      font-size: .8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+      padding-right: 76px;
+    }
+    .card-resp-icon { flex-shrink: 0; font-size: .75rem; margin-top: 1px; }
+
+    /* Botão agenda (.ics) */
+    .btn-ics {
+      position: absolute;
+      bottom: 13px;
+      right: 12px;
+      background: rgba(15,58,72,.07);
+      color: var(--primary);
+      border: 1px solid rgba(15,58,72,.18);
+      border-radius: 9px;
+      padding: 5px 9px;
+      font-size: .67rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+      transition: background .2s, color .2s, border-color .2s;
+      letter-spacing: .2px;
+    }
+    [data-theme="dark"] .btn-ics {
+      background: rgba(79,195,247,.09);
+      color: var(--accent);
+      border-color: rgba(79,195,247,.25);
+    }
+    .btn-ics:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    [data-theme="dark"] .btn-ics:hover {
+      background: var(--accent);
+      color: #0a1520;
+      border-color: var(--accent);
+    }
+
+    /* =====================================================
+       ESTADOS (carregando, vazio, erro)
+    ===================================================== */
+    .state-box {
+      text-align: center;
+      padding: 48px 24px 32px;
+      color: var(--text-muted);
+    }
+    .state-box .s-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .state-box .s-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .state-box .s-desc { font-size: .85rem; line-height: 1.6; }
+
+    .no-results {
+      text-align: center;
+      padding: 36px 20px;
+      color: var(--text-muted);
+      font-size: .9rem;
+    }
+
+    /* =====================================================
+       HIGHLIGHT DE BUSCA
+    ===================================================== */
+    mark {
+      background: rgba(255, 193, 7, .38);
+      color: inherit;
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+    [data-theme="dark"] mark { background: rgba(255, 193, 7, .28); }
+
+    /* =====================================================
+       RODAPÉ
+    ===================================================== */
+    .footer {
+      text-align: center;
+      padding: 20px 16px;
+      font-size: .7rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    /* Suporte a safe-area do iPhone */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .footer { padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+    }
+
+    /* =====================================================
+       RESPONSIVO (telas maiores)
+    ===================================================== */
+    @media (min-width: 480px) {
+      .event-name { font-size: 1.05rem; }
+      .card-time  { font-size: 1.18rem; }
+      .card-title { font-size: 1rem;    }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header class="header">
+  <div class="header-top">
+    <div class="event-logo">
+      <span class="event-cross">✝</span>
+      <div class="event-texts">
+        <div class="event-name">XXXI Encontro de Casais – GIFC BSF</div>
+        <div class="event-sub">25 e 26 de Julho de 2026 · Barra de São Francisco – ES</div>
+      </div>
+    </div>
+    <button class="btn-dark" id="btnDark" title="Alternar modo escuro" aria-label="Modo escuro">🌙</button>
+  </div>
+
+  <!-- Busca -->
+  <div class="search-wrap">
+    <div class="search-inner">
+      <span class="search-icon">🔍</span>
+      <input
+        type="search"
+        class="search-input"
+        id="searchInput"
+        placeholder="Buscar atividade ou responsável..."
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+        aria-label="Buscar"
+      />
+      <button class="btn-clear" id="btnClear" aria-label="Limpar busca">✕</button>
+    </div>
+    <label class="search-all-row" for="chkAll">
+      <input type="checkbox" id="chkAll" />
+      Buscar em todos os dias
+    </label>
+  </div>
+
+  <!-- Abas -->
+  <nav class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="Sábado"   role="tab" aria-selected="true">📅 Sábado</button>
+    <button class="tab-btn"        data-tab="Domingo"  role="tab" aria-selected="false">📅 Domingo</button>
+    <button class="tab-btn"        data-tab="Palestras" role="tab" aria-selected="false">🎤 Palestras</button>
+  </nav>
+</header>
+
+<!-- ==================== STATUS ==================== -->
+<div class="status-bar">
+  <div class="status-left">
+    <span class="pulse-dot loading" id="pulseDot"></span>
+    <span class="last-update" id="lastUpdate">Carregando dados…</span>
+  </div>
+  <button class="btn-refresh" id="btnRefresh" aria-label="Atualizar agora">
+    <span id="refreshIcon">⟳</span> Atualizar
+  </button>
+</div>
+
+<!-- ==================== ERRO ==================== -->
+<div class="error-box" id="errorBox" role="alert"></div>
+
+<!-- ==================== CONTEÚDO ==================== -->
+<main class="content" id="mainContent" role="main">
+  <div class="state-box">
+    <div class="s-icon">⏳</div>
+    <div class="s-title">Carregando programação…</div>
+    <div class="s-desc">Buscando dados da planilha Google</div>
+  </div>
+</main>
+
+<!-- ==================== RODAPÉ ==================== -->
+<footer class="footer">
+  XXXI Encontro de Casais – GIFC BSF – 2026<br/>
+  Dados atualizados automaticamente a cada 20 segundos
+</footer>
+
+<!-- ==================== SCRIPT ==================== -->
+<script>
+/* ================================================================
+   CONFIGURAÇÃO — EDITE APENAS ESTA SEÇÃO ANTES DE PUBLICAR
+================================================================ */
+const CFG = {
+  // 1. Cole o ID da sua planilha Google (parte da URL entre /d/ e /edit)
+  SPREADSHEET_ID: 'COLE_AQUI_O_ID_DA_PLANILHA',
+
+  // 2. Cole sua chave de API do Google Cloud Console
+  API_KEY: 'COLE_AQUI_A_CHAVE_DE_API',
+
+  // 3. Nomes EXATOS das abas na planilha (sensível a maiúsculas/acentos)
+  SHEET_NAMES: {
+    'Sábado':    'Sábado',
+    'Domingo':   'Domingo',
+    'Palestras': 'Palestras',   // mude para 'Palestrantes' se esse for o nome real da aba
+  },
+
+  // 4. Datas do evento
+  DATES: {
+    'Sábado':  '2026-07-25',
+    'Domingo': '2026-07-26',
+  },
+
+  // 5. Índices (base 0 no array retornado pela API) das linhas de data
+  //    na aba Palestras. Linha 4 da planilha = índice 3; Linha 15 = índice 14.
+  PALESTRAS_DATE_ROWS: {
+    3:  '2026-07-25',   // Row 4 → Sábado
+    14: '2026-07-26',   // Row 15 → Domingo
+  },
+
+  // 6. Intervalo de polling em milissegundos (padrão: 20 s)
+  POLL_MS: 20_000,
+};
+/* ================================================================
+   FIM DA CONFIGURAÇÃO
+================================================================ */
+
+
+/* ================================================================
+   ESTADO GLOBAL
+================================================================ */
+const ST = {
+  activeTab: 'Sábado',
+  data: { 'Sábado': null, 'Domingo': null, 'Palestras': null },
+  loading: false,
+  lastOk: null,
+  searchQuery: '',
+  searchAll: false,
+  pollTimer: null,
+  cdTimer: null,
+};
+
+
+/* ================================================================
+   UTILITÁRIOS DE TEMPO
+================================================================ */
+
+/** Converte valor vindo do Sheets (serial decimal ou string "H:MM") → "HH:MM" */
+function parseTime(val) {
+  if (val === null || val === undefined || val === '') return null;
+
+  // Número serial do Sheets: 0.291667 = 07:00
+  const num = typeof val === 'number' ? val : (String(val).includes(':') ? NaN : parseFloat(val));
+  if (!isNaN(num) && num >= 0 && num < 1) {
+    const totalSec = Math.round(num * 86400);
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    return pad2(h) + ':' + pad2(m);
+  }
+
+  // Texto: "7:00", "07:00", "7:00:00", "7:00 AM" etc.
+  const s = String(val).trim();
+  const m = s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?$/i);
+  if (m) {
+    let h = parseInt(m[1], 10);
+    const min = parseInt(m[2], 10);
+    if (m[3]) {
+      const ap = m[3].toUpperCase();
+      if (ap === 'PM' && h !== 12) h += 12;
+      if (ap === 'AM' && h === 12) h = 0;
+    }
+    return pad2(h) + ':' + pad2(min);
+  }
+
+  return null;
+}
+
+function pad2(n) { return String(n).padStart(2, '0'); }
+
+/** "HH:MM" → minutos desde meia-noite */
+function toMin(hhmm) {
+  if (!hhmm) return null;
+  const [h, m] = hhmm.split(':').map(Number);
+  return h * 60 + m;
+}
+
+/** Minutos atuais (fuso do browser) */
+function nowMin() {
+  const d = new Date();
+  return d.getHours() * 60 + d.getMinutes();
+}
+
+/** "YYYY-MM-DD" da data atual no fuso do browser */
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+}
+
+
+/* ================================================================
+   FETCH DA API GOOGLE SHEETS v4
+================================================================ */
+
+async function fetchSheet(tabKey) {
+  const sheetName = CFG.SHEET_NAMES[tabKey];
+  const url =
+    `https://sheets.googleapis.com/v4/spreadsheets/${CFG.SPREADSHEET_ID}` +
+    `/values/${encodeURIComponent(sheetName)}` +
+    `?key=${CFG.API_KEY}&valueRenderOption=FORMATTED_VALUE`;
+
+  const res = await fetch(url);
+  if (!res.ok) {
+    let msg = `HTTP ${res.status}`;
+    try {
+      const j = await res.json();
+      msg = j?.error?.message || msg;
+    } catch (_) {}
+    throw new Error(`Aba "${sheetName}": ${msg}`);
+  }
+  const j = await res.json();
+  return j.values || [];
+}
+
+/*
+  ALTERNATIVA sem API Key (gviz — pode ter cache de 1-2 min):
+  URL: https://docs.google.com/spreadsheets/d/{ID}/gviz/tq?sheet={ABA}&tqx=out:json
+  Retorna JSONP. Remova o prefixo "/*O_o*\/" e "google.visualization.Query.setResponse(" antes de JSON.parse.
+*/
+
+
+/* ================================================================
+   PARSE DOS DADOS
+================================================================ */
+
+function parseRows(values, tabKey) {
+  if (!values || values.length < 2) return [];
+
+  const isPalestras = (tabKey === 'Palestras');
+  let currentDate = CFG.DATES[tabKey] || '2026-07-25';
+  const items = [];
+
+  for (let i = 1; i < values.length; i++) {
+    const row = values[i] || [];
+
+    /* --- Aba Palestras: detectar linhas de cabeçalho de data --- */
+    if (isPalestras) {
+      if (CFG.PALESTRAS_DATE_ROWS[i] !== undefined) {
+        currentDate = CFG.PALESTRAS_DATE_ROWS[i];
+        continue; // pular esta linha (é um cabeçalho de data)
+      }
+    }
+
+    /* Colunas: 0=Ordem, 1=Início, 2=Término, 3=Min, 4=Atividade/Palestra, 5=Responsável/Palestrante */
+    const rawStart = row[1];
+    const rawEnd   = row[2];
+    const title    = (row[4] || '').trim();
+    const start    = parseTime(rawStart);
+
+    // Pular linhas sem horário válido ou sem título
+    if (!start || !title) continue;
+
+    const end      = parseTime(rawEnd) || '';
+    const resp     = (row[5] || '').trim();
+    const durStr   = row[3] ? String(row[3]).trim() : '';
+
+    // Classificar tipo para destaque visual
+    const lc = title.toLowerCase();
+    const isPalestra = isPalestras ||
+      /\bpalestra\b|\bconferência\b|\bworkshop\b/i.test(title);
+    const isCerim = /\bcerim[oô]nia\b|\bcasamento\b|\bbatismo\b|\bceia\b|\bculto\b/i.test(title);
+
+    items.push({
+      id:          `${tabKey}-${i}`,
+      start,
+      end,
+      dur:         durStr ? `${durStr} min` : '',
+      title,
+      resp,
+      date:        currentDate,
+      tabKey,
+      isPalestra,
+      isCerim,
+    });
+  }
+
+  return items;
+}
+
+
+/* ================================================================
+   CARREGAMENTO & POLLING
+================================================================ */
+
+async function loadAll() {
+  if (ST.loading) return;
+  ST.loading = true;
+  setLoadingUI(true);
+  hideError();
+
+  const tabs = Object.keys(CFG.SHEET_NAMES);
+  const results = await Promise.allSettled(tabs.map(t => fetchSheet(t)));
+
+  const errs = [];
+  results.forEach((r, i) => {
+    const tab = tabs[i];
+    if (r.status === 'fulfilled') {
+      ST.data[tab] = parseRows(r.value, tab);
+    } else {
+      errs.push(r.reason.message);
+      if (ST.data[tab] === null) ST.data[tab] = [];
+    }
+  });
+
+  if (errs.length) showError(errs.join('\n'));
+
+  ST.lastOk = errs.length < tabs.length ? new Date() : ST.lastOk;
+  updateStatusBar();
+  renderTab();
+
+  ST.loading = false;
+  setLoadingUI(false);
+}
+
+function setLoadingUI(on) {
+  const btn  = document.getElementById('btnRefresh');
+  const icon = document.getElementById('refreshIcon');
+  const dot  = document.getElementById('pulseDot');
+  btn.disabled = on;
+  icon.className = on ? 'spin' : '';
+  icon.textContent = '⟳';
+  if (on) { dot.className = 'pulse-dot loading'; }
+}
+
+function updateStatusBar() {
+  const dot  = document.getElementById('pulseDot');
+  const upd  = document.getElementById('lastUpdate');
+  const hasErr = document.getElementById('errorBox').style.display !== 'none';
+  if (ST.lastOk) {
+    dot.className = 'pulse-dot' + (hasErr ? ' error' : '');
+    upd.textContent = 'Atualizado às ' + ST.lastOk.toLocaleTimeString('pt-BR');
+  } else {
+    dot.className = 'pulse-dot error';
+    upd.textContent = 'Falha ao carregar dados';
+  }
+}
+
+function startPoll() {
+  if (ST.pollTimer) clearInterval(ST.pollTimer);
+  ST.pollTimer = setInterval(loadAll, CFG.POLL_MS);
+}
+
+
+/* ================================================================
+   RENDER
+================================================================ */
+
+function getVisibleItems() {
+  const q = ST.searchQuery.toLowerCase().trim();
+
+  if (!q) return ST.data[ST.activeTab] || [];
+
+  const source = ST.searchAll
+    ? Object.values(ST.data).flat().filter(Boolean)
+    : (ST.data[ST.activeTab] || []);
+
+  return source.filter(it =>
+    it.title.toLowerCase().includes(q) ||
+    it.resp.toLowerCase().includes(q)
+  );
+}
+
+function renderTab() {
+  const container = document.getElementById('mainContent');
+  const items  = getVisibleItems();
+  const q      = ST.searchQuery.toLowerCase().trim();
+  const today  = todayStr();
+  const now    = nowMin();
+
+  // Parar countdown anterior
+  if (ST.cdTimer) clearInterval(ST.cdTimer);
+
+  if (!items || items.length === 0) {
+    if (ST.data[ST.activeTab] === null) {
+      container.innerHTML = tmplLoading();
+    } else if (q) {
+      container.innerHTML =
+        `<div class="no-results">😕 Nenhum resultado para "<strong>${esc(q)}</strong>"</div>`;
+    } else {
+      container.innerHTML = tmplEmpty();
+    }
+    return;
+  }
+
+  /* --- Detectar item atual e próximo (apenas no dia de hoje) --- */
+  const todayItems = items.filter(it => it.date === today);
+  let nowId = null, nextId = null, nextStart = null;
+
+  for (let i = 0; i < todayItems.length; i++) {
+    const it = todayItems[i];
+    const s  = toMin(it.start);
+    const e  = toMin(it.end);
+    if (s === null) continue;
+
+    if (e !== null && now >= s && now < e) {
+      nowId = it.id;
+    } else if (nowId !== null && nextId === null && s > now) {
+      nextId    = it.id;
+      nextStart = s;
+    } else if (nowId === null && nextId === null && s > now) {
+      nextId    = it.id;
+      nextStart = s;
+    }
+  }
+
+  /* --- Montar HTML --- */
+  let html = '';
+
+  if (ST.searchAll && q) {
+    // Agrupar por aba quando busca em tudo
+    const groups = {};
+    items.forEach(it => {
+      if (!groups[it.tabKey]) groups[it.tabKey] = [];
+      groups[it.tabKey].push(it);
+    });
+    const labels = {
+      'Sábado':    '📅 Sábado, 25 de Julho',
+      'Domingo':   '📅 Domingo, 26 de Julho',
+      'Palestras': '🎤 Palestras & Cerimônias',
+    };
+    for (const tab of Object.keys(CFG.SHEET_NAMES)) {
+      if (groups[tab]?.length) {
+        html += `<div class="day-label">${labels[tab]}</div>`;
+        html += groups[tab].map(it => cardHTML(it, nowId, nextId, nextStart, q)).join('');
+      }
+    }
+  } else {
+    const labels = {
+      'Sábado':    '📅 Sábado, 25 de Julho de 2026',
+      'Domingo':   '📅 Domingo, 26 de Julho de 2026',
+      'Palestras': '🎤 Palestras & Cerimônias',
+    };
+    html += `<div class="day-label">${labels[ST.activeTab]}</div>`;
+    html += items.map(it => cardHTML(it, nowId, nextId, nextStart, q)).join('');
+  }
+
+  container.innerHTML = html;
+
+  // Scroll suave até o item atual
+  if (nowId && !q) {
+    const el = document.getElementById('c-' + nowId);
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
+  }
+
+  // Iniciar countdown para o próximo item
+  if (nextId && nextStart !== null) startCountdown(nextId, nextStart);
+}
+
+function cardHTML(it, nowId, nextId, nextStart, q) {
+  const isNow  = it.id === nowId;
+  const isNext = it.id === nextId;
+
+  let cls = 'card';
+  if (isNow)        cls += ' is-now';
+  else if (isNext)  cls += ' is-next';
+  if (it.isCerim)   cls += ' is-cerim';
+  else if (it.isPalestra) cls += ' is-palestra';
+
+  /* Badges */
+  let badges = '';
+  if (isNow)  badges += '<span class="badge badge-now">▶ AGORA</span>';
+  if (isNext) {
+    badges += '<span class="badge badge-next">PRÓXIMO</span>';
+    badges += `<span class="badge badge-countdown" id="cd-${it.id}">em breve</span>`;
+  }
+  if (!isNow && it.isCerim)    badges += '<span class="badge badge-cerim">Cerimônia</span>';
+  else if (!isNow && it.isPalestra) badges += '<span class="badge badge-palestra">Palestra</span>';
+
+  const badgesHTML = badges ? `<div class="badges">${badges}</div>` : '';
+
+  /* Horário */
+  const timeLabel = it.end ? `${it.start} – ${it.end}` : it.start;
+  const durLabel  = it.dur ? `<span class="time-dur">(${it.dur})</span>` : '';
+
+  /* Textos com highlight */
+  const titleHL = hl(it.title, q);
+  const respHL  = hl(it.resp,  q);
+
+  /* Ícone de responsável */
+  const respIcon = it.isPalestra ? '🎤' : '👥';
+
+  /* Botão ICS — dados como atributos data-* para segurança */
+  const icsDate = it.date || CFG.DATES[it.tabKey] || '2026-07-25';
+
+  return `
+<div class="${cls}" id="c-${it.id}">
+  ${badgesHTML}
+  <div class="card-time">${timeLabel} ${durLabel}</div>
+  <div class="card-title">${titleHL}</div>
+  ${it.resp ? `<div class="card-resp"><span class="card-resp-icon">${respIcon}</span>${respHL}</div>` : ''}
+  <button class="btn-ics"
+    data-title="${attr(it.title)}"
+    data-desc="${attr(it.resp)}"
+    data-date="${attr(icsDate)}"
+    data-start="${attr(it.start)}"
+    data-end="${attr(it.end || it.start)}"
+    onclick="handleICS(this)"
+    title="Adicionar ao calendário">
+    📅 Agenda
+  </button>
+</div>`;
+}
+
+/* Templates de estado */
+function tmplLoading() {
+  return `<div class="state-box">
+    <div class="s-icon">⏳</div>
+    <div class="s-title">Carregando…</div>
+  </div>`;
+}
+function tmplEmpty() {
+  return `<div class="state-box">
+    <div class="s-icon">📋</div>
+    <div class="s-title">Nenhuma atividade encontrada</div>
+    <div class="s-desc">Verifique se a aba da planilha tem dados.</div>
+  </div>`;
+}
+
+
+/* ================================================================
+   COUNTDOWN
+================================================================ */
+
+function startCountdown(itemId, targetMin) {
+  function tick() {
+    const diff = targetMin - nowMin();
+    const el   = document.getElementById('cd-' + itemId);
+    if (!el) { clearInterval(ST.cdTimer); return; }
+    if (diff <= 0) {
+      el.textContent = 'agora!';
+      clearInterval(ST.cdTimer);
+      setTimeout(loadAll, 1500);
+      return;
+    }
+    const h = Math.floor(diff / 60);
+    const m = diff % 60;
+    el.textContent = h > 0 ? `em ${h}h ${pad2(m)}min` : `em ${m} min`;
+  }
+  tick();
+  ST.cdTimer = setInterval(tick, 30_000);
+}
+
+
+/* ================================================================
+   GERAÇÃO DE .ICS (ADICIONAR À AGENDA)
+================================================================ */
+
+function handleICS(btn) {
+  const { title, desc, date, start, end } = btn.dataset;
+  if (!date || !start) return;
+
+  const [y, mo, da] = date.split('-');
+  const [sh, sm]    = start.split(':');
+  const [eh, em]    = (end || start).split(':');
+
+  const dtstart = `${y}${mo}${da}T${sh}${sm}00`;
+  const dtend   = `${y}${mo}${da}T${eh}${em}00`;
+  const uid     = `${dtstart}-${Math.random().toString(36).slice(2, 11)}@gifc-bsf-2026`;
+
+  function icsEsc(s) {
+    return (s || '').replace(/\\/g,'\\\\').replace(/,/g,'\\,').replace(/;/g,'\\;').replace(/\n/g,'\\n');
+  }
+
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//GIFC BSF//Encontro de Casais 2026//PT',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    // Definição de fuso
+    'BEGIN:VTIMEZONE',
+    'TZID:America/Sao_Paulo',
+    'BEGIN:STANDARD',
+    'DTSTART:19700101T000000',
+    'TZOFFSETFROM:-0300',
+    'TZOFFSETTO:-0300',
+    'TZNAME:BRT',
+    'END:STANDARD',
+    'END:VTIMEZONE',
+    // Evento
+    'BEGIN:VEVENT',
+    `UID:${uid}`,
+    `DTSTART;TZID=America/Sao_Paulo:${dtstart}`,
+    `DTEND;TZID=America/Sao_Paulo:${dtend}`,
+    `SUMMARY:${icsEsc(title)}`,
+    `DESCRIPTION:${icsEsc(desc)}`,
+    'LOCATION:Barra de São Francisco - ES',
+    // Lembrete 10 min antes
+    'BEGIN:VALARM',
+    'TRIGGER:-PT10M',
+    'ACTION:DISPLAY',
+    'DESCRIPTION:Lembrete – GIFC BSF 2026',
+    'END:VALARM',
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ];
+
+  const ics  = lines.join('\r\n');
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement('a'), {
+    href:     url,
+    download: (title || 'evento').replace(/[^a-zA-Z0-9À-ɏ ]/g, '').replace(/\s+/g, '_') + '.ics',
+  });
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+
+/* ================================================================
+   ERRO
+================================================================ */
+
+function showError(msg) {
+  const box = document.getElementById('errorBox');
+  box.innerHTML = `<strong>⚠️ Erro ao buscar dados:</strong><pre>${esc(msg)}</pre>`;
+  box.style.display = 'block';
+  document.getElementById('pulseDot').className = 'pulse-dot error';
+}
+function hideError() {
+  document.getElementById('errorBox').style.display = 'none';
+}
+
+
+/* ================================================================
+   HELPERS DE ESCAPE / HIGHLIGHT
+================================================================ */
+
+function esc(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function attr(s) {
+  return String(s || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function hl(text, query) {
+  const safe = esc(text || '');
+  if (!query) return safe;
+  const rx = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  return safe.replace(rx, m => `<mark>${m}</mark>`);
+}
+
+
+/* ================================================================
+   EVENTOS DA UI
+================================================================ */
+
+/* Modo escuro */
+(function initTheme() {
+  const saved = localStorage.getItem('theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(saved);
+})();
+
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('btnDark').textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+
+document.getElementById('btnDark').addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+});
+
+/* Abas */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    ST.activeTab = btn.dataset.tab;
+    // Limpar busca ao trocar de aba (exceto se estiver em "buscar em todos")
+    if (!ST.searchAll) {
+      ST.searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('btnClear').classList.remove('visible');
+    }
+    renderTab();
+  });
+});
+
+/* Busca */
+let searchDebounce;
+document.getElementById('searchInput').addEventListener('input', e => {
+  ST.searchQuery = e.target.value;
+  document.getElementById('btnClear').classList.toggle('visible', !!ST.searchQuery);
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(renderTab, 180);
+});
+
+document.getElementById('btnClear').addEventListener('click', () => {
+  ST.searchQuery = '';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('btnClear').classList.remove('visible');
+  renderTab();
+});
+
+document.getElementById('chkAll').addEventListener('change', e => {
+  ST.searchAll = e.target.checked;
+  if (ST.searchQuery) renderTab();
+});
+
+/* Botão Atualizar */
+document.getElementById('btnRefresh').addEventListener('click', () => {
+  loadAll();
+  startPoll(); // reinicia o timer
+});
+
+
+/* ================================================================
+   RE-RENDER PERIÓDICO (para manter "agora"/"próximo" correto)
+================================================================ */
+setInterval(() => {
+  if (Object.values(ST.data).some(d => d !== null)) renderTab();
+}, 60_000);
+
+
+/* ================================================================
+   INICIALIZAÇÃO
+================================================================ */
+loadAll();
+startPoll();
+
+</script>
+</body>
+</html>
